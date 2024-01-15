@@ -1,0 +1,24 @@
+﻿@model City
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit City</h2>
+			</br>
+		</div>
+		<div class="mb-3">
+			<label asp-for="cityName">
+				<input asp-for="cityName" class="form-control" />
+				<span asp-validation-for="cityName" class="text-danger"></span>
+			</label>
+			<label asp-for="cityID">
+				<input asp-for="cityID" class="form-control" />
+				<span asp-validation-for="cityID" class="text-danger"></span>
+			</label>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Cities" asp-action="Index" class="btn btn-primary">
+			Back
+		</a>
+	</div>
+</form>

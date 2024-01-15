@@ -1,0 +1,84 @@
+﻿@model IEnumerable<City>
+   
+@functions {
+    int len = 5;
+    bool flag = true;
+    public int back()
+    {
+        len += 5;
+        return len;
+    }
+} 
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["success"]!=null){
+    <h2>@TempData["success"]</h2>
+}
+<div>
+    <form class="d-flex" method="get" action="@Url.Action("Index")"
+          data-otf-ajax="true" data-otf-target="#contactList">
+        <input class="form-control me-sm-2" type="search" name="search" style="width:15%" data-otf-autocomplete="@Url.Action("Autocomplete", "Contacts")" />
+        <button type="submit" class="btn"><i class="bi bi-search" id="Search" onclick="Search"></i></button>
+    </form>
+    <a asp-controller="Cities" asp-action="Add" class="btn btn-primary">
+        <i class="bi bi-plus-circle-dotted"></i>
+        Add city
+    </a>
+
+        <a asp-controller="Cities" asp-action="Sort" class="btn btn-primary; m-2">
+            <i class="bi bi-arrow-down-up"></i>
+        </a>
+    <a class="btn btn-primary; m-2" onclick="@back()">
+        <i class="bi bi-arrow-bar-left"></i>
+    </a>
+
+    
+        <a class="btn btn-primary; m-2">
+            <i class="bi bi-arrow-bar-right"></i>
+        </a>
+
+</div>
+   
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th style="color:deeppink; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+               שם עיר
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <th style="color:lightpink; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                    <div>
+                        @obj.cityName
+                        @* <button type="button" class="btn btn-danger">Danger</button> *@
+                    </div>
+                   
+                </th>
+                <th>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Cities" asp-action="Edit" asp-route-id="@obj.cityID" class="btn">
+                            <i class="bi bi-pencil"></i></a>
+
+                        <a asp-controller="Cities" asp-action="Delete" asp-route-id="@obj.cityID" class="btn">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                        
+                    </div>
+                </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div id="items">
+
+</div>
+<script src="./js/site.js"></script>
